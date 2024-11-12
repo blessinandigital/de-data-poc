@@ -1,16 +1,20 @@
 import * as contentful from 'contentful-management';
 import { FieldAppSDK } from "@contentful/app-sdk";
 import { useSDK } from "@contentful/react-apps-toolkit";
+import * as dotenv from 'dotenv';
+
 
 
 export async function fetchData (){
   const sdk = useSDK<FieldAppSDK>();
+  dotenv.config();
 
   const cma = sdk.cma;
+  let accessToken: string = ''
   
   try{
     const client = contentful.createClient({
-      accessToken: '',
+      accessToken: accessToken,
     });
     
     const space = await client.getSpace('snl01naumpba')
