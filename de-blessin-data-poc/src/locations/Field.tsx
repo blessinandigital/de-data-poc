@@ -25,26 +25,6 @@ const Field = () => {
 
   const [fetchedData, setFetchedData] = useState< string|string[]>('0000');
 
-async function fetchData (){
-  const sdk = useSDK<FieldAppSDK>();
-
-  const cma = sdk.cma;
-  
-  try{
-    const client = contentful.createClient({
-      accessToken: '',
-    });
-    
-    const space = await client.getSpace('snl01naumpba')
-    const environment = await space.getEnvironment('master')
-    const entries = await environment.getEntries()
-    const ingredientsList = entries.items.map((entry) => entry.fields.toString())
-    return ingredientsList
-  }catch(error){
-    console.error(error)
-    return 'Error '+error
-  }
-}
   useEffect(() => {
     fetchData()
       .then((result: string | string[]) => {
